@@ -1,0 +1,813 @@
+<title>어디서만나 · 중간역</title>
+<meta name="description" content="친구들 출발지로 공평한 중간역을 찾고, 취향·핫플·팝업까지 추천">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --ground:#EDF0EB; --panel:#FFFFFF; --panel-2:#F6F8F4; --ink:#15201B; --muted:#5C6962; --faint:#8E9A93;
+  --line:#D3DAD4; --accent:#00A650; --accent-ink:#FFFFFF; --accent-soft:#DDF2E4;
+  --popup:#D0246B; --popup-soft:#FBE3EC; --warn:#B86E00; --warn-soft:#FBEFD9; --river:#BFD9EA;
+  --shadow:0 1px 0 rgba(21,32,27,.04),0 8px 24px -12px rgba(21,32,27,.18);
+  --display:"Do Hyeon","Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --body:"IBM Plex Sans KR","Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1411; --panel:#161F1A; --panel-2:#1B2620; --ink:#E4ECE7; --muted:#9AA9A1; --faint:#6E7D75;
+  --line:#2A3730; --accent:#2BC46E; --accent-ink:#06150C; --accent-soft:#163A26;
+  --popup:#FF5E9C; --popup-soft:#3A1726; --warn:#F0AE4A; --warn-soft:#3A2A10; --river:#1D3444;
+  --shadow:0 1px 0 rgba(0,0,0,.3),0 10px 28px -14px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1411; --panel:#161F1A; --panel-2:#1B2620; --ink:#E4ECE7; --muted:#9AA9A1; --faint:#6E7D75;
+  --line:#2A3730; --accent:#2BC46E; --accent-ink:#06150C; --accent-soft:#163A26;
+  --popup:#FF5E9C; --popup-soft:#3A1726; --warn:#F0AE4A; --warn-soft:#3A2A10; --river:#1D3444;
+  --shadow:0 1px 0 rgba(0,0,0,.3),0 10px 28px -14px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;padding:20px 20px 48px;-webkit-font-smoothing:antialiased}
+button,input{font:inherit;color:inherit}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+
+.top{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:14px}
+.brand-mark{width:46px;height:46px;border-radius:50%;border:6px solid var(--accent);background:var(--panel);display:grid;place-items:center;font-family:var(--display);font-size:18px;color:var(--ink);flex:none}
+.brand h1{font-family:var(--display);font-weight:400;font-size:34px;line-height:1;margin:0;letter-spacing:-.01em}
+.brand p{margin:4px 0 0;color:var(--muted);font-size:13.5px}
+.room{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.room code{font-family:var(--mono);font-size:14px;color:var(--ink);background:var(--panel);border:1px solid var(--line);padding:3px 9px;border-radius:6px;letter-spacing:.12em}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--faint);display:inline-block}
+.dot.live{background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+
+.grid{display:grid;grid-template-columns:minmax(300px,370px) 1fr;gap:18px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px}
+.pad{padding:18px}
+.eyebrow{font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+h2{font-family:var(--display);font-weight:400;font-size:22px;margin:0;line-height:1.2;text-wrap:balance}
+
+.banner{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--warn-soft);color:var(--ink);border-radius:10px;padding:10px 12px;font-size:13px}
+.banner b{color:var(--warn)}
+
+.side{display:flex;flex-direction:column;gap:14px}
+.friends{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column}
+.friend{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.friend:first-child{border-top:0}
+.avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-size:14px}
+.friend .nm{font-weight:600;font-size:14.5px;line-height:1.3}
+.friend .st{font-size:12.5px;color:var(--muted);display:flex;gap:4px;align-items:center;flex-wrap:wrap}
+.friend .prefs{font-size:12px;color:var(--faint)}
+.iconbtn{border:0;background:transparent;color:var(--faint);width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:18px;line-height:1}
+.iconbtn:hover{background:var(--panel-2);color:var(--ink)}
+
+.form{display:flex;flex-direction:column;gap:12px;border-top:1px dashed var(--line);padding-top:14px;margin-top:6px}
+.field{display:flex;flex-direction:column;gap:5px;position:relative}
+.field label,.field .lbl{font-size:12.5px;font-weight:600;color:var(--muted)}
+.input{width:100%;background:var(--panel-2);border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-size:14.5px}
+.input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.suggest{position:absolute;top:100%;left:0;right:0;z-index:20;background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-top:4px;box-shadow:var(--shadow);max-height:260px;overflow:auto;padding:4px}
+.suggest button{display:flex;width:100%;justify-content:space-between;align-items:center;gap:8px;border:0;background:transparent;text-align:left;padding:8px 9px;border-radius:7px;cursor:pointer;font-size:14px}
+.suggest button[aria-selected="true"],.suggest button:hover{background:var(--accent-soft)}
+.suggest .ai{color:var(--muted);font-size:13px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:4px 11px;font-size:13px;cursor:pointer;line-height:1.5}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--panel)}
+.chip.static{cursor:default}
+.btn{border:0;border-radius:10px;padding:10px 14px;font-weight:600;cursor:pointer;font-size:14px}
+.btn-primary{background:var(--accent);color:var(--accent-ink)}
+.btn-primary:disabled,.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn-ghost{background:transparent;border:1px solid var(--line)}
+.btn-ghost:hover{background:var(--panel-2)}
+.btn-sm{padding:6px 10px;font-size:12.5px;border-radius:8px}
+.hint{font-size:12px;color:var(--faint);margin:0;font-weight:400}
+.err{font-size:12.5px;color:var(--popup);margin:0}
+.how{font-size:12.5px;color:var(--muted);margin:0}
+
+.lb{display:inline-grid;place-items:center;min-width:19px;height:19px;padding:0 5px;border-radius:999px;color:#fff;font-size:10.5px;font-weight:700;font-family:var(--body);line-height:1;white-space:nowrap}
+.lb.round{width:19px;padding:0}
+
+.main{display:flex;flex-direction:column;gap:14px;min-width:0}
+.mapbox{position:relative;overflow:hidden}
+.mapbox svg{display:block;width:100%;height:auto}
+.maplegend{position:absolute;left:14px;top:12px;display:flex;flex-direction:column;gap:2px;pointer-events:none}
+.maplegend .t{font-family:var(--display);font-size:20px}
+.maplegend .s{font-size:12px;color:var(--muted)}
+.mapnote{position:absolute;right:12px;bottom:10px;font-size:11px;color:var(--faint)}
+
+.tabs{display:flex;gap:4px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:4px;flex-wrap:wrap}
+.tab{flex:1 1 150px;border:0;background:transparent;border-radius:9px;padding:9px 10px;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:1px}
+.tab b{font-size:14.5px}
+.tab span{font-size:12px;color:var(--muted)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--panel)}
+.tab[aria-selected="true"] span{color:var(--panel);opacity:.72}
+
+.results{display:grid;grid-template-columns:minmax(260px,1fr) minmax(300px,1.25fr);gap:14px;align-items:start}
+@media (max-width:1100px){.results{grid-template-columns:1fr}}
+.list{list-style:none;margin:0;padding:6px;display:flex;flex-direction:column;gap:2px}
+.cand{display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:center;width:100%;border:0;background:transparent;text-align:left;padding:10px;border-radius:10px;cursor:pointer}
+.cand:hover{background:var(--panel-2)}
+.cand[aria-current="true"]{background:var(--accent-soft)}
+.rank{font-family:var(--mono);font-size:12px;color:var(--faint);text-align:center}
+.cand .nm{font-weight:600;font-size:15px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.cand .why{font-size:12.5px;color:var(--muted);display:block}
+.cand .mins{font-family:var(--mono);font-size:13px;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cand .mins small{display:block;color:var(--faint);font-size:11px}
+.tag{display:inline-block;font-size:11px;font-weight:600;padding:1px 7px;border-radius:999px;line-height:1.6}
+.tag.pop{background:var(--popup-soft);color:var(--popup)}
+.tag.fair{background:var(--accent-soft);color:var(--accent)}
+.tag.far{background:var(--warn-soft);color:var(--warn)}
+.empty{padding:28px 18px;text-align:center;color:var(--muted);font-size:14px}
+
+.detail{display:flex;flex-direction:column;overflow:hidden}
+.sign{--lc:var(--accent);background:var(--lc);color:#fff;padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;position:relative}
+.sign::after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:rgba(0,0,0,.2)}
+.sign-top{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:12px;opacity:.95;flex-wrap:wrap;text-shadow:0 1px 1px rgba(0,0,0,.25)}
+.sign-name{font-family:var(--display);font-size:42px;line-height:1;letter-spacing:-.01em;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;text-shadow:0 1px 2px rgba(0,0,0,.22)}
+.sign-name small{font-family:var(--body);font-size:13px;font-weight:500;opacity:.92}
+.sign .lines{display:flex;gap:5px;flex-wrap:wrap}
+.sign .lb{box-shadow:0 0 0 2px #fff}
+.dbody{padding:16px 18px 18px;display:flex;flex-direction:column;gap:18px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat{background:var(--panel-2);border-radius:10px;padding:9px 11px;min-width:0}
+.stat .k{font-size:11.5px;color:var(--muted)}
+.stat .v{font-family:var(--mono);font-size:19px;font-weight:600;font-variant-numeric:tabular-nums}
+.stat .v.sm{font-family:var(--body);font-size:14px;font-weight:700;padding-top:4px}
+.bars{display:flex;flex-direction:column;gap:7px}
+.bar{display:grid;grid-template-columns:70px 1fr 64px;gap:8px;align-items:center;font-size:13px}
+.bar .who{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar .track{height:10px;background:var(--panel-2);border-radius:999px;overflow:hidden}
+.bar .fill{display:block;height:100%;border-radius:999px}
+.bar .m{font-family:var(--mono);font-size:12.5px;text-align:right;font-variant-numeric:tabular-nums}
+.sec h3{font-size:13px;font-weight:700;margin:0 0 8px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.spots{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+@media (max-width:480px){.spots{grid-template-columns:1fr}}
+.spots li{font-size:13.5px;padding:7px 10px;border:1px solid var(--line);border-radius:9px}
+.vibe{font-size:14px;color:var(--muted);margin:0}
+.linkrow{display:flex;flex-wrap:wrap;gap:6px}
+.linkbtn{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-size:13px;font-weight:600;padding:7px 11px;border-radius:9px;border:1px solid var(--line);background:var(--panel)}
+.linkbtn:hover{border-color:var(--ink)}
+.linkbtn i{font-style:normal;width:8px;height:8px;border-radius:2px;display:inline-block}
+.course{list-style:none;padding:0;display:flex;flex-direction:column;border-left:3px solid var(--accent);margin:0 0 0 6px}
+.course li{position:relative;padding:4px 0 12px 16px}
+.course li::before{content:"";position:absolute;left:-8.5px;top:9px;width:14px;height:14px;border-radius:50%;background:var(--panel);border:3px solid var(--accent)}
+.course .when{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.course .ttl{font-weight:700;font-size:14.5px}
+.course .what{font-size:13px;color:var(--muted)}
+.course a{font-size:12px;font-weight:600;color:var(--accent)}
+.ai-note{font-size:11.5px;color:var(--faint);margin:6px 0 0}
+.stream{font-size:13px;color:var(--muted);white-space:pre-wrap;max-height:120px;overflow:auto;background:var(--panel-2);border-radius:8px;padding:8px 10px}
+.foot{font-size:12px;color:var(--faint);max-width:80ch;margin:4px 0 0}
+@media (prefers-reduced-motion:no-preference){.cand,.tab,.chip,.btn{transition:background .15s,color .15s,border-color .15s}}
+@media (max-width:480px){body{padding:14px 16px 40px}.brand h1{font-size:28px}.sign-name{font-size:34px}.stat .v{font-size:16px}.stat{padding:8px}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">중</div>
+      <div>
+        <h1>어디서만나</h1>
+        <p>각자 출발역만 넣으면, 모두에게 공평한 중간역과 놀 거리를 찾아줘요</p>
+      </div>
+    </div>
+    <div class="room" id="roomBar"></div>
+  </header>
+
+  <div id="banner"></div>
+
+  <div class="grid">
+    <aside class="side">
+      <section class="panel pad" aria-labelledby="friendsTitle">
+        <p class="eyebrow">모임 멤버</p>
+        <h2 id="friendsTitle">누가 어디서 출발해요?</h2>
+        <ul class="friends" id="friends"></ul>
+
+        <form class="form" id="addForm" autocomplete="off">
+          <div class="field">
+            <label for="nameInput">이름</label>
+            <input class="input" id="nameInput" maxlength="12" placeholder="예: 민지">
+          </div>
+          <div class="field">
+            <label for="stationInput">출발역 / 동네</label>
+            <input class="input" id="stationInput" placeholder="역 이름 검색 (예: 노원, 판교)" role="combobox" aria-expanded="false" aria-controls="suggest" aria-autocomplete="list">
+            <div class="suggest" id="suggest" role="listbox" hidden></div>
+          </div>
+          <div class="field">
+            <span class="lbl">이 사람 취향 <span class="hint">(여러 개 선택)</span></span>
+            <div class="chips" id="prefChips"></div>
+          </div>
+          <p class="err" id="formErr" hidden></p>
+          <button class="btn btn-primary" id="addBtn" type="submit">멤버 추가</button>
+        </form>
+      </section>
+
+      <section class="panel pad" aria-labelledby="howTitle">
+        <p class="eyebrow" id="howTitle">이렇게 계산해요</p>
+        <p class="how">
+          출발역에서 후보 역까지의 직선거리로 지하철 소요 시간을 <b>추정</b>해요 (평균 약 33km/h, 우회 1.3배, 대기 7분, 다른 노선이면 환승 +5분).
+          <b>거리 중간</b>은 가장 오래 걸리는 사람의 시간과 편차가 작은 역을, <b>취향 저격</b>은 조금 멀어도 모두의 취향이 겹치는 동네를, <b>핫플·팝업</b>은 요즘 붐비고 팝업이 자주 열리는 곳을 골라요.
+        </p>
+      </section>
+    </aside>
+
+    <main class="main">
+      <section class="panel mapbox" aria-label="지도">
+        <div class="maplegend"><span class="t" id="mapTitle">중간역 지도</span><span class="s" id="mapSub"></span></div>
+        <svg id="map" viewBox="0 0 720 400" role="img" aria-label="출발지와 추천 역 위치"></svg>
+        <span class="mapnote">개략도 · 선은 직선거리</span>
+      </section>
+
+      <div class="tabs" role="tablist" id="tabs">
+        <button class="tab" role="tab" id="tab-mid" aria-selected="true" data-tab="mid" type="button"><b>거리 중간</b><span>모두 비슷하게 걸리는 역</span></button>
+        <button class="tab" role="tab" id="tab-taste" aria-selected="false" data-tab="taste" type="button"><b>취향 저격</b><span>조금 멀어도 딱 맞는 동네</span></button>
+        <button class="tab" role="tab" id="tab-hot" aria-selected="false" data-tab="hot" type="button"><b>핫플 · 팝업</b><span>요즘 뜨는 곳, 팝업 성지</span></button>
+      </div>
+
+      <div class="results">
+        <section class="panel" aria-label="추천 후보"><ul class="list" id="list"></ul></section>
+        <section class="panel detail" id="detail" aria-live="polite"></section>
+      </div>
+
+      <p class="foot">소요 시간은 직선거리 기반 추정치예요. 실제 경로·막차는 지도 앱에서 확인하세요. 팝업·행사는 매주 바뀌어서 각 동네의 ‘지금 팝업 검색’ 링크로 최신 정보를 확인하도록 연결해 뒀어요.</p>
+    </main>
+  </div>
+</div>
+
+<script>
+/* ───────── data ───────── */
+const LINE_COLORS={"1":"#0052A4","2":"#00A84D","3":"#EF7C1C","4":"#00A5DE","5":"#996CAC","6":"#CD7C2F","7":"#747F00","8":"#E6186C","9":"#BDB092",
+"신분당":"#D4003B","수인분당":"#F5A200","경의중앙":"#77C4A3","공항":"#0090D2","인천1":"#7CA8D5","우이신설":"#B7C452","신림선":"#6789CA","김포골드":"#A17800","GTX-A":"#9A6292","SRT":"#651C5C","경춘":"#0C8E72"};
+const LINE_SHORT={"신분당":"신분","수인분당":"분당","경의중앙":"경의","공항":"공항","인천1":"인천","우이신설":"우이","신림선":"신림","김포골드":"김포","GTX-A":"GTX","SRT":"SRT","경춘":"경춘"};
+const FRIEND_COLORS=["#0052A4","#EF7C1C","#996CAC","#E6186C","#00A5DE","#747F00","#CD7C2F","#D4003B","#0C8E72","#651C5C"];
+const PREFS=[["food","맛집"],["cafe","카페"],["bar","술집"],["game","노래방·보드게임"],["escape","방탈출"],["exhibit","전시·팝업"],["shop","쇼핑"],["show","공연·영화"],["park","산책·공원"],["activity","액티비티"],["cheap","가성비"],["date","분위기 좋은"],["photo","사진 명소"]];
+const PREF_LABEL=Object.fromEntries(PREFS);
+
+// 동네 후보: 이름|대표역|위도|경도|노선|태그|인기(1-5)|팝업빈도(0-2)|대표 놀거리;…|한줄 소개
+const AREAS_RAW=`홍대·연남|홍대입구|37.5572|126.9245|2,공항,경의중앙|food,cafe,bar,game,show,shop,photo,cheap|5|2|걷고싶은거리 버스킹;경의선숲길(연트럴파크);연남동 카페골목;라이브클럽·공연장|모두에게 무난하고, 밤늦게까지 놀기 좋은 곳
+합정·상수|합정|37.5496|126.9139|2,6|cafe,bar,food,date,photo|4|1|상수동 골목 바;합정 카페거리;메세나폴리스;절두산 성지 산책로|조용한 골목 술집과 카페가 많아 대화하기 좋은 곳
+망원|망원|37.5561|126.9101|6|food,cafe,cheap,park,date|4|0|망원시장 먹거리;망리단길 소품샵;망원한강공원;한강 따릉이|시장 먹거리 들고 한강까지, 가성비 최고 코스
+신촌·이대|신촌|37.5552|126.9369|2|bar,game,cheap,food,escape|3|0|연세로 술집거리;보드게임카페;방탈출 카페;이대 앞 옷가게|학생가 물가, 단체 모임 부담 없는 곳
+성수|성수|37.5445|127.0560|2|cafe,exhibit,shop,photo,food,date|5|2|연무장길 팝업스토어;성수 카페거리;서울숲;뚝섬한강공원|요즘 팝업은 여기서 시작, 주말엔 웨이팅 각오
+서울숲|서울숲|37.5436|127.0446|수인분당|park,cafe,date,photo|4|1|서울숲 공원;언더스탠드에비뉴;아뜰리에길 카페|피크닉·산책 위주로 여유롭게 만나기 좋은 곳
+건대|건대입구|37.5404|127.0692|2,7|bar,food,cheap,game,show|4|1|건대 맛의거리;건대 로데오거리;어린이대공원;건대 영화관|양꼬치부터 포차까지, 2차 3차가 쉬운 동네
+왕십리|왕십리|37.5613|127.0371|2,5,경의중앙,수인분당|show,shop,food,cheap|2|0|왕십리 IMAX 영화관;역사 쇼핑몰;한양대 앞 술집;청계천 산책|4개 노선 환승역이라 모이기 편한 곳
+강남|강남|37.4979|127.0276|2,신분당|bar,food,shop,show,escape,game|4|1|강남대로 번화가;방탈출·보드게임;멀티플렉스 영화관;신논현 맛집골목|선택지가 가장 많은 만능 번화가
+코엑스|삼성|37.5089|127.0631|2|exhibit,shop,show,photo,date|4|2|별마당도서관;코엑스 아쿠아리움;코엑스몰;봉은사|비 와도 실내에서 하루 종일 가능
+잠실|잠실|37.5133|127.1001|2,8|activity,shop,park,date,photo,exhibit|5|2|롯데월드 어드벤처;석촌호수 산책;롯데월드몰 팝업;서울스카이 전망대|놀이공원·호수·팝업을 한 번에
+송리단길|석촌|37.5054|127.1060|8,9|cafe,food,date,photo|4|1|송리단길 카페·맛집;석촌호수 동호 산책;골목 디저트 가게|잠실보다 아늑한 골목 데이트 코스
+가로수길|신사|37.5163|127.0203|3,신분당|shop,cafe,date,food,photo|3|1|가로수길 쇼핑;세로수길 카페;잠원한강공원|쇼핑하고 브런치 먹기 좋은 거리
+압구정로데오|압구정로데오|37.5273|127.0405|수인분당|cafe,food,shop,exhibit,date|4|2|도산공원;압구정로데오 맛집;브랜드 플래그십·팝업|트렌디한 식당과 브랜드 팝업이 몰린 곳
+여의도|여의도|37.5216|126.9243|5,9|shop,park,exhibit,date,photo|5|2|더현대 서울 팝업;여의도한강공원;IFC몰;한강 유람선|더현대 팝업 + 한강 피크닉 조합
+영등포|영등포|37.5157|126.9076|1|shop,show,food,cheap|3|1|타임스퀘어;영등포 백화점가;영등포시장 먹거리|대형 쇼핑몰 하나로 해결되는 곳
+문래|문래|37.5180|126.8950|2|bar,food,exhibit,photo|3|0|문래창작촌 골목;철공소 사이 펍·와인바;소규모 전시공간|철공소 골목의 독특한 분위기
+용산|용산|37.5299|126.9648|1,경의중앙|show,shop,game,park|3|1|아이파크몰;용산 IMAX 영화관;국립중앙박물관·용산가족공원|영화·박물관·쇼핑몰이 가까운 곳
+용리단길|삼각지|37.5347|126.9730|4,6|food,bar,cafe,photo|4|0|용리단길 맛집;노포 술집;전쟁기념관|요즘 뜨는 맛집 골목
+이태원|이태원|37.5345|126.9946|6|bar,food,show|3|0|세계 음식 거리;루프탑 바;경리단길|이국 음식과 루프탑 바
+한남|한강진|37.5396|127.0017|6|cafe,exhibit,shop,date,photo|4|2|리움미술관;한남동 편집숍;블루스퀘어 공연장;한남 카페|전시 보고 편집숍 구경하는 감각적인 동네
+을지로|을지로3가|37.5663|126.9912|2,3|bar,food,cheap,photo|4|0|을지로 노가리골목;힙지로 바·루프탑;세운상가|노포와 힙한 바가 공존하는 골목
+익선동·종로|종로3가|37.5714|126.9918|1,3,5|food,bar,cheap,photo,date|4|0|익선동 한옥골목;종로 포차거리;창덕궁|한옥 골목 맛집 + 저렴한 포차
+북촌·삼청|안국|37.5765|126.9854|3|exhibit,cafe,park,photo,date|4|1|북촌 한옥마을;삼청동 갤러리;국립현대미술관 서울;경복궁|전시 보고 한옥 카페에서 쉬기
+광화문|광화문|37.5710|126.9768|5|exhibit,park,shop,photo|3|0|경복궁;교보문고 광화문;청계천;세종문화회관|도심 산책과 서점, 궁 나들이
+명동|명동|37.5609|126.9863|4|shop,food,photo|3|1|명동 길거리 음식;백화점 본점가;남산서울타워(케이블카)|길거리 음식 먹고 남산까지
+대학로|혜화|37.5822|127.0019|4|show,game,escape,cheap,food,park|4|0|소극장 연극;방탈출 카페;마로니에공원;낙산공원 성곽길|연극 한 편 + 방탈출, 놀거리 밀도 최고
+동대문 DDP|동대문역사문화공원|37.5652|127.0079|2,4,5|exhibit,shop,photo|3|1|DDP 전시;동대문 패션타운;청계천 야경|DDP 전시와 야경
+성신여대|성신여대입구|37.5926|127.0164|4,우이신설|cheap,bar,food,cafe|3|0|성신여대 로데오거리;가성비 술집;동네 카페|북쪽 친구들이 편한 가성비 번화가
+노원|노원|37.6551|127.0613|4,7|cheap,bar,food,show|3|0|노원 문화의거리;노원역 백화점;먹자골목|동북권 최대 번화가
+사당|사당|37.4766|126.9816|2,4|bar,cheap,food|3|0|사당 먹자골목;관악산 입구|남쪽·경기 남부 친구들과 만나기 좋은 곳
+샤로수길|서울대입구|37.4812|126.9527|2|food,cheap,cafe,bar|4|0|샤로수길 맛집;관악 카페골목|저렴한데 맛있는 집이 많은 골목
+신림|신림|37.4842|126.9297|2,신림선|cheap,bar,food,game|2|0|신림 순대타운;도림천 산책;가성비 술집|순대볶음과 가성비 술집
+고속터미널|고속터미널|37.5049|127.0049|3,7,9|shop,food,park|3|1|백화점·파미에스테이션;고투몰 지하상가;반포한강공원 무지개분수|3개 노선 환승, 쇼핑과 한강 분수
+판교|판교|37.3948|127.1112|신분당|shop,food,cafe,park|3|1|판교 백화점;판교 카페거리;화랑공원|경기 남부 친구들의 중간 거점
+목동|오목교|37.5245|126.8751|5|shop,show,food|2|0|목동 백화점;파리공원|서남권에서 편하게 만나는 곳
+마곡|마곡나루|37.5667|126.8272|9,공항|park,cafe,exhibit,date|3|0|서울식물원;LG아트센터 서울;마곡 카페|식물원 산책과 공연
+청량리|청량리|37.5801|127.0470|1,경의중앙,수인분당|cheap,food,shop|2|0|경동시장;청량리 백화점;전통시장 먹거리|시장 구경과 가성비 먹거리
+천호|천호|37.5386|127.1236|5,8|shop,cheap,food|2|0|천호 백화점;천호 로데오거리|동쪽 끝 친구들이 편한 번화가
+연신내|연신내|37.6190|126.9210|3,6|cheap,bar,food|2|0|연신내 먹자골목;로데오거리|서북권 가성비 술자리
+부평|부평|37.4895|126.7234|1,인천1|shop,cheap,food,bar|3|0|부평 지하상가;부평 문화의거리|인천 친구들과 만날 때 최선
+송도|센트럴파크|37.3935|126.6343|인천1|park,shop,date,photo|3|0|송도 센트럴파크;트리플스트리트;송도 아울렛|수상택시 타고 공원 산책
+일산|정발산|37.6597|126.7733|3|park,shop,food|2|0|일산호수공원;라페스타·웨스턴돔|호수공원 산책과 먹자골목
+수원|수원|37.2660|127.0000|1,수인분당|shop,cheap,food|2|0|수원역 쇼핑몰;수원역 로데오;행궁동(버스 이동)|경기 남부 끝 친구들 기준 거점`;
+
+const STATIONS_RAW=`서울역|37.5547|126.9707|1,4,공항,경의중앙
+시청|37.5657|126.9769|1,2
+종각|37.5702|126.9831|1
+동대문|37.5714|127.0098|1,4
+회기|37.5898|127.0579|1,경의중앙
+외대앞|37.5963|127.0633|1
+석계|37.6147|127.0659|1,6
+광운대|37.6236|127.0617|1
+창동|37.6531|127.0477|1,4
+도봉산|37.6896|127.0461|1,7
+의정부|37.7385|127.0459|1
+구로|37.5031|126.8820|1
+신도림|37.5088|126.8913|1,2
+부천|37.4841|126.7827|1
+송내|37.4876|126.7536|1
+주안|37.4648|126.6800|1
+가산디지털단지|37.4815|126.8826|1,7
+금정|37.3721|126.9434|1,4
+안양|37.4017|126.9227|1
+을지로입구|37.5660|126.9826|2
+한양대|37.5556|127.0436|2
+뚝섬|37.5474|127.0474|2
+구의|37.5372|127.0858|2
+강변|37.5351|127.0947|2
+잠실새내|37.5116|127.0863|2
+종합운동장|37.5109|127.0736|2,9
+선릉|37.5045|127.0490|2,수인분당
+역삼|37.5006|127.0364|2
+교대|37.4934|127.0142|2,3
+서초|37.4918|127.0076|2
+방배|37.4815|126.9976|2
+낙성대|37.4769|126.9636|2
+봉천|37.4825|126.9416|2
+신대방|37.4875|126.9131|2
+구로디지털단지|37.4853|126.9015|2
+대림|37.4925|126.8950|2,7
+당산|37.5344|126.9025|2,9
+영등포구청|37.5255|126.8966|2,5
+이대|37.5567|126.9460|2
+까치산|37.5317|126.8466|2,5
+대화|37.6761|126.7473|3
+주엽|37.6703|126.7612|3
+화정|37.6343|126.8325|3
+불광|37.6103|126.9300|3,6
+홍제|37.5890|126.9437|3
+경복궁|37.5757|126.9735|3
+충무로|37.5613|126.9943|3,4
+약수|37.5543|127.0107|3,6
+옥수|37.5405|127.0184|3,경의중앙
+압구정|37.5270|127.0284|3
+남부터미널|37.4850|127.0162|3
+양재|37.4845|127.0342|3,신분당
+도곡|37.4910|127.0556|3,수인분당
+수서|37.4873|127.1018|3,수인분당,SRT
+가락시장|37.4925|127.1182|3,8
+오금|37.5021|127.1281|3,5
+상계|37.6608|127.0735|4
+미아|37.6264|127.0260|4
+미아사거리|37.6133|127.0300|4
+길음|37.6033|127.0250|4
+한성대입구|37.5885|127.0065|4
+이촌|37.5222|126.9743|4,경의중앙
+동작|37.5028|126.9793|4,9
+이수|37.4863|126.9819|4,7
+과천|37.4332|126.9968|4
+평촌|37.3943|126.9636|4
+범계|37.3900|126.9505|4
+산본|37.3581|126.9330|4
+안산 중앙|37.3160|126.8387|4
+김포공항|37.5624|126.8013|5,9,공항,김포골드
+발산|37.5585|126.8375|5
+화곡|37.5415|126.8404|5
+목동|37.5260|126.8646|5
+여의나루|37.5271|126.9328|5
+마포|37.5395|126.9458|5
+공덕|37.5443|126.9514|5,6,공항,경의중앙
+군자|37.5572|127.0795|5,7
+강동|37.5358|127.1325|5
+고덕|37.5550|127.1543|5
+올림픽공원|37.5162|127.1308|5,9
+미사|37.5630|127.1932|5
+응암|37.5985|126.9156|6
+디지털미디어시티|37.5770|126.8995|6,공항,경의중앙
+월드컵경기장|37.5683|126.8972|6
+마포구청|37.5635|126.9035|6
+녹사평|37.5345|126.9869|6
+신당|37.5657|127.0192|2,6
+안암|37.5863|127.0293|6
+고려대|37.5906|127.0363|6
+태릉입구|37.6178|127.0750|6,7
+중계|37.6448|127.0641|7
+공릉|37.6257|127.0730|7
+상봉|37.5965|127.0850|7,경의중앙
+면목|37.5886|127.0874|7
+어린이대공원|37.5480|127.0741|7
+뚝섬유원지|37.5316|127.0667|7
+청담|37.5193|127.0533|7
+강남구청|37.5171|127.0412|7,수인분당
+학동|37.5143|127.0317|7
+논현|37.5110|127.0215|7,신분당
+반포|37.5082|127.0118|7
+내방|37.4876|126.9935|7
+숭실대입구|37.4963|126.9536|7
+장승배기|37.5048|126.9391|7
+보라매|37.4998|126.9205|7,신림선
+철산|37.4761|126.8680|7
+광명사거리|37.4792|126.8548|7
+온수|37.4923|126.8233|1,7
+부천시청|37.5048|126.7630|7
+암사|37.5500|127.1275|8
+강동구청|37.5302|127.1206|8
+송파|37.4998|127.1122|8
+문정|37.4858|127.1224|8
+복정|37.4700|127.1265|8,수인분당
+모란|37.4322|127.1291|8,수인분당
+별내|37.6424|127.1270|8,경춘
+가양|37.5614|126.8544|9
+국회의사당|37.5282|126.9178|9
+노량진|37.5135|126.9426|1,9
+흑석|37.5088|126.9636|9
+신논현|37.5045|127.0250|9,신분당
+선정릉|37.5104|127.0437|9,수인분당
+봉은사|37.5143|127.0602|9
+중앙보훈병원|37.5285|127.1484|9
+정자|37.3670|127.1085|신분당,수인분당
+미금|37.3500|127.1089|신분당,수인분당
+수지구청|37.3223|127.0951|신분당
+광교중앙|37.2886|127.0516|신분당
+광교|37.3018|127.0444|신분당
+야탑|37.4115|127.1275|수인분당
+서현|37.3850|127.1234|수인분당
+수내|37.3784|127.1143|수인분당
+오리|37.3399|127.1089|수인분당
+죽전|37.3246|127.1073|수인분당
+기흥|37.2757|127.1159|수인분당
+구리|37.6030|127.1433|경의중앙
+일산|37.6820|126.7697|경의중앙
+대곡|37.6317|126.8110|3,경의중앙
+운정|37.7254|126.7684|경의중앙
+검암|37.5693|126.6737|공항
+청라국제도시|37.5560|126.6247|공항
+계양|37.5714|126.7359|공항,인천1
+인천시청|37.4575|126.7023|인천1
+부평구청|37.5086|126.7215|7,인천1
+인천대입구|37.3861|126.6392|인천1
+동탄|37.2002|127.0957|SRT,GTX-A
+구래|37.6450|126.6285|김포골드`;
+
+const AREAS=AREAS_RAW.trim().split("\n").map((l,i)=>{const[n,st,la,ln,lines,tags,hot,pop,spots,vibe]=l.split("|");
+  return{id:"a"+i,n,st,lat:+la,lng:+ln,lines:lines.split(","),tags:tags.split(","),hot:+hot,pop:+pop,spots:spots.split(";"),vibe};});
+const STATIONS={};
+STATIONS_RAW.trim().split("\n").forEach(l=>{const[n,la,ln,lines]=l.split("|");STATIONS[n]={lat:+la,lng:+ln,lines:lines.split(",")};});
+AREAS.forEach(a=>{if(!STATIONS[a.st])STATIONS[a.st]={lat:a.lat,lng:a.lng,lines:a.lines};});
+const STATION_NAMES=Object.keys(STATIONS).sort((a,b)=>a.localeCompare(b,"ko"));
+
+const EXAMPLE=[
+  {id:"ex1",name:"지우",station:"노원",prefs:["bar","cheap","game"],color:FRIEND_COLORS[0]},
+  {id:"ex2",name:"태현",station:"신도림",prefs:["food","show","bar"],color:FRIEND_COLORS[1]},
+  {id:"ex3",name:"하린",station:"판교",prefs:["cafe","exhibit","photo"],color:FRIEND_COLORS[2]},
+].map(p=>({...p,...STATIONS[p.station]}));
+
+/* ───────── helpers ───────── */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const lineBadge=l=>{const t=LINE_SHORT[l]||l;return `<span class="lb${t.length===1?" round":""}" style="background:${LINE_COLORS[l]||"#777"}" title="${esc(l)}${/^\d$/.test(l)?"호선":""}">${esc(t)}</span>`;};
+const hav=(a,b)=>{const R=6371,r=Math.PI/180,dLa=(b.lat-a.lat)*r,dLo=(b.lng-a.lng)*r;
+  const x=Math.sin(dLa/2)**2+Math.cos(a.lat*r)*Math.cos(b.lat*r)*Math.sin(dLo/2)**2;return 2*R*Math.asin(Math.sqrt(x));};
+function estMin(p,a){
+  const d=hav(p,a);
+  if(d<0.7)return{m:Math.max(3,Math.round(d*15)),walk:true,shared:true,d};
+  const shared=(p.lines||[]).some(l=>a.lines.includes(l));
+  return{m:Math.round(7+d*1.3/0.55+(shared?0:5)),walk:false,shared,d};
+}
+function fairLabel(spread){
+  if(spread<=10)return["매우 공평","fair"];
+  if(spread<=20)return["공평한 편","fair"];
+  if(spread<=35)return["한 명이 좀 멀어요","far"];
+  return["누군가 많이 멀어요","far"];
+}
+const colorOf=p=>p.color||FRIEND_COLORS[Math.max(0,S.people.indexOf(p))%FRIEND_COLORS.length];
+const qNaver=q=>"https://map.naver.com/p/search/"+encodeURIComponent(q);
+const qKakao=q=>"https://map.kakao.com/?q="+encodeURIComponent(q);
+const qSearch=q=>"https://search.naver.com/search.naver?query="+encodeURIComponent(q);
+const qInsta=t=>"https://www.instagram.com/explore/tags/"+encodeURIComponent(t.replace(/[\s·()]/g,""))+"/";
+let LS=null;try{LS=window.localStorage;LS.getItem("x");}catch(e){LS=null;}
+const lsGet=(k,d)=>{try{const v=LS&&LS.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}};
+const lsSet=(k,v)=>{try{LS&&LS.setItem(k,JSON.stringify(v));}catch(e){}};
+
+/* ───────── state ───────── */
+const S={
+  mode:"example",           // example | room | local
+  room:null, people:EXAMPLE.slice(), tab:"mid", selected:null,
+  formPrefs:new Set(), pending:null,
+  db:null, sample:null, unsub:null, course:{}, courseBusy:null,
+};
+
+/* ───────── scoring ───────── */
+function scored(){
+  const ppl=S.people.filter(p=>typeof p.lat==="number");
+  if(!ppl.length)return[];
+  const w={};ppl.forEach(p=>(p.prefs||[]).forEach(k=>w[k]=(w[k]||0)+1/ppl.length));
+  const wTot=Object.values(w).reduce((a,b)=>a+b,0)||1;
+  return AREAS.map(a=>{
+    const t=ppl.map(p=>({p,...estMin(p,a)}));
+    const ms=t.map(x=>x.m),avg=ms.reduce((x,y)=>x+y,0)/ms.length,max=Math.max(...ms),min=Math.min(...ms),spread=max-min;
+    const hits=a.tags.filter(k=>w[k]).sort((x,y)=>w[y]-w[x]);
+    const match=hits.reduce((s,k)=>s+w[k],0)/wTot;
+    const fair=.45*avg+.4*max+.15*spread;
+    return{a,t,avg,max,min,spread,hits,match,
+      mid:fair-4*match-.4*a.hot,
+      taste:.3*avg+.2*max-34*match-2.5*a.hot-(w.exhibit?3*a.pop:0),
+      hot:-(a.hot*3+a.pop*3.2+7*match)+avg/9};
+  });
+}
+function ranked(){const all=scored();return all.sort((x,y)=>x[S.tab]-y[S.tab]).slice(0,7);}
+function whyLine(r,best){
+  const topHit=r.hits.slice(0,2).map(k=>PREF_LABEL[k]).join("·");
+  if(S.tab==="mid"){
+    if(r===best)return `가장 먼 사람도 ${r.max}분 안에 도착`;
+    return topHit?`${topHit} 취향까지 챙기는 선택`:`평균 ${Math.round(r.avg)}분`;
+  }
+  if(S.tab==="taste")return r.hits.length?`취향 ${r.hits.length}개 일치 · ${topHit}`:"취향 겹치는 곳이 적어요";
+  return r.a.pop===2?"팝업·행사가 자주 열리는 곳":r.a.hot>=4?"요즘 사람 많은 곳":"취향 맞는 동네";
+}
+
+/* ───────── render: header / friends ───────── */
+function renderRoom(){
+  const bar=$("#roomBar");
+  if(S.mode==="room"){
+    bar.innerHTML=`<span class="dot live" aria-hidden="true"></span><span>함께 편집 중 · 모임 코드</span><code>${esc(S.room)}</code>
+      <button class="btn btn-ghost btn-sm" id="copyCode" type="button">코드 복사</button>
+      <button class="btn btn-ghost btn-sm" id="leaveRoom" type="button">나가기</button>`;
+    $("#copyCode").onclick=()=>{if(navigator.clipboard)navigator.clipboard.writeText(S.room).then(()=>{$("#copyCode").textContent="복사됨";}).catch(()=>{});};
+    $("#leaveRoom").onclick=leaveRoom;
+  }else{
+    bar.innerHTML=`<span class="dot" aria-hidden="true"></span><span>${S.mode==="local"?"이 기기에만 저장 중":"예시 모임"}</span>
+      ${S.db?`<button class="btn btn-primary btn-sm" id="newRoom" type="button">친구들과 함께 쓰기</button>
+      <input class="input" id="codeInput" maxlength="6" placeholder="모임 코드" aria-label="모임 코드" style="width:104px;padding:5px 9px;font-size:13px;text-transform:uppercase">
+      <button class="btn btn-ghost btn-sm" id="joinRoom" type="button">참여</button>`:""}`;
+    if(S.db){
+      $("#newRoom").onclick=()=>createRoom();
+      $("#joinRoom").onclick=()=>{const c=$("#codeInput").value.trim().toUpperCase();if(/^[A-Z0-9]{4,6}$/.test(c))joinRoom(c);else $("#codeInput").focus();};
+    }
+  }
+  const b=$("#banner");
+  if(S.mode==="example"){
+    b.innerHTML=`<div class="banner"><span><b>예시 모임</b>을 보여드리는 중이에요 — 노원·신도림·판교에서 출발하는 세 친구.</span>
+      <button class="btn btn-ghost btn-sm" id="startOwn" type="button">예시 지우고 우리 모임 시작</button></div>`;
+    $("#startOwn").onclick=()=>{ if(S.db)createRoom(); else {S.mode="local";S.people=[];save();renderAll();$("#nameInput").focus();} };
+  }else b.innerHTML="";
+}
+function renderFriends(){
+  const ul=$("#friends");
+  if(!S.people.length){ul.innerHTML=`<li class="empty" style="padding:14px 0">아직 아무도 없어요. 아래에서 첫 멤버를 추가하세요.${S.mode==="room"?"<br>친구에게 이 페이지와 모임 코드를 보내면 각자 자기 출발지를 넣을 수 있어요.":""}</li>`;return;}
+  ul.innerHTML=S.people.map(p=>`<li class="friend">
+    <span class="avatar" style="background:${colorOf(p)}">${esc((p.name||"?").slice(0,1))}</span>
+    <div><div class="nm">${esc(p.name)}</div>
+      <div class="st">${esc(p.station)}${p.ai?" (AI 추정 위치)":""} ${(p.lines||[]).slice(0,4).map(lineBadge).join("")}</div>
+      ${(p.prefs||[]).length?`<div class="prefs">${p.prefs.map(k=>PREF_LABEL[k]).filter(Boolean).join(" · ")}</div>`:""}
+    </div>
+    <button class="iconbtn" type="button" data-del="${esc(p.id)}" aria-label="${esc(p.name)} 삭제">×</button></li>`).join("");
+  ul.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>removePerson(b.dataset.del));
+}
+function renderPrefChips(){
+  $("#prefChips").innerHTML=PREFS.map(([k,l])=>`<button type="button" class="chip" data-k="${k}" aria-pressed="${S.formPrefs.has(k)}">${l}</button>`).join("");
+  $("#prefChips").querySelectorAll(".chip").forEach(c=>c.onclick=()=>{const k=c.dataset.k;S.formPrefs.has(k)?S.formPrefs.delete(k):S.formPrefs.add(k);c.setAttribute("aria-pressed",S.formPrefs.has(k));});
+}
+
+/* ───────── render: map ───────── */
+const RIVER=[[37.600,126.765],[37.588,126.800],[37.578,126.840],[37.566,126.870],[37.552,126.893],[37.538,126.915],[37.533,126.935],[37.525,126.955],[37.518,126.975],[37.517,126.995],[37.522,127.012],[37.530,127.030],[37.534,127.050],[37.530,127.070],[37.524,127.085],[37.528,127.100],[37.540,127.115],[37.552,127.130],[37.565,127.160],[37.572,127.195]];
+function renderMap(list){
+  const svg=$("#map"),W=720,H=400,P=48;
+  const ppl=S.people.filter(p=>typeof p.lat==="number");
+  const sel=list.find(r=>r.a.id===S.selected)||list[0];
+  $("#mapSub").textContent=ppl.length?`${ppl.length}명 출발 · 추천 ${list.length}곳`:"멤버를 추가하면 지도가 그려져요";
+  const pts=[...ppl,...list.map(r=>r.a)];
+  if(!pts.length){svg.innerHTML=`<rect width="${W}" height="${H}" fill="var(--panel)"/>`;return;}
+  const la0=Math.min(...pts.map(p=>p.lat)),la1=Math.max(...pts.map(p=>p.lat)),lo0=Math.min(...pts.map(p=>p.lng)),lo1=Math.max(...pts.map(p=>p.lng));
+  const k=Math.cos((la0+la1)/2*Math.PI/180);
+  const spanX=Math.max((lo1-lo0)*k,.03),spanY=Math.max(la1-la0,.03);
+  const sc=Math.min((W-2*P)/spanX,(H-2*P-20)/spanY);
+  const cx=(lo0+lo1)/2,cy=(la0+la1)/2;
+  const X=lng=>W/2+(lng-cx)*k*sc, Y=lat=>H/2+18-(lat-cy)*sc;
+  let g=`<rect width="${W}" height="${H}" fill="var(--panel)"/>`;
+  for(let x=0;x<=W;x+=40)g+=`<line x1="${x}" y1="0" x2="${x}" y2="${H}" stroke="var(--line)" stroke-width=".6" opacity=".55"/>`;
+  for(let y=0;y<=H;y+=40)g+=`<line x1="0" y1="${y}" x2="${W}" y2="${y}" stroke="var(--line)" stroke-width=".6" opacity=".55"/>`;
+  const rp=RIVER.map(([la,ln])=>`${X(ln).toFixed(1)},${Y(la).toFixed(1)}`).join(" ");
+  const rw=Math.max(6,Math.min(26,.9*sc/111));
+  g+=`<polyline points="${rp}" fill="none" stroke="var(--river)" stroke-width="${rw}" stroke-linecap="round" stroke-linejoin="round"/>`;
+  const lab=RIVER[9],lx=X(lab[1]),ly=Y(lab[0])+rw/2+13;
+  if(lx>30&&lx<W-30&&ly>20&&ly<H-20)g+=`<text x="${lx}" y="${ly}" font-size="11" fill="var(--faint)" text-anchor="middle" font-family="var(--body)">한강</text>`;
+  if(ppl.length>1){const c={lat:ppl.reduce((s,p)=>s+p.lat,0)/ppl.length,lng:ppl.reduce((s,p)=>s+p.lng,0)/ppl.length};
+    const x=X(c.lng),y=Y(c.lat);g+=`<g stroke="var(--faint)" stroke-width="1.5"><line x1="${x-7}" y1="${y}" x2="${x+7}" y2="${y}"/><line x1="${x}" y1="${y-7}" x2="${x}" y2="${y+7}"/></g><text x="${x+9}" y="${y+14}" font-size="10.5" fill="var(--faint)" font-family="var(--body)">지리적 중심</text>`;}
+  if(sel){ppl.forEach(p=>{const col=colorOf(p);const t=sel.t.find(x=>x.p===p);
+    const x1=X(p.lng),y1=Y(p.lat),x2=X(sel.a.lng),y2=Y(sel.a.lat);
+    g+=`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${col}" stroke-width="4" stroke-linecap="round" opacity=".85"/>`;
+    if(t&&Math.hypot(x2-x1,y2-y1)>60)g+=`<text x="${(x1+x2)/2}" y="${(y1+y2)/2-6}" font-size="12" font-weight="600" text-anchor="middle" fill="var(--ink)" stroke="var(--panel)" stroke-width="4" paint-order="stroke" font-family="var(--mono)">${t.m}분</text>`;});}
+  // label placement: selected first, then by rank; skip a label rather than overlap
+  const boxes=ppl.map(p=>{const x=X(p.lng),y=Y(p.lat);return[x-30,y-14,x+30,y+34];});
+  const hit=b=>b[0]<4||b[2]>W-4||b[1]<50||b[3]>H-4||boxes.some(o=>b[0]<o[2]&&b[2]>o[0]&&b[1]<o[3]&&b[3]>o[1]);
+  const order=list.map((r,i)=>({r,i})).sort((u,v)=>((sel&&v.r===sel)-(sel&&u.r===sel))||u.i-v.i);
+  const labels={};
+  order.forEach(({r})=>{const on=sel&&r===sel,x=X(r.a.lng),y=Y(r.a.lat),fs=on?15:12,w=r.a.n.length*fs*.95+6,h=fs+4,off=on?14:10;
+    const tries=[[x-w/2,y-off-h,"middle",x,y-off-3],[x-w/2,y+off,"middle",x,y+off+fs-1],[x+off,y-h/2,"start",x+off,y+fs/2-2],[x-off-w,y-h/2,"end",x-off,y+fs/2-2]];
+    for(const[bx,by,anchor,tx,ty]of tries){const b=[bx,by,bx+w,by+h];if(!hit(b)){boxes.push(b);labels[r.a.id]={anchor,tx,ty,fs,on};return;}}
+    if(on){labels[r.a.id]={anchor:"middle",tx:x,ty:y-off-3,fs,on};}
+  });
+  list.forEach(r=>{const on=sel&&r.a.id===sel.a.id,x=X(r.a.lng),y=Y(r.a.lat),L=labels[r.a.id];
+    g+=`<g class="mc" data-id="${r.a.id}" style="cursor:pointer"><title>${esc(r.a.n)}</title><circle cx="${x}" cy="${y}" r="${on?11:7}" fill="var(--panel)" stroke="${on?"var(--accent)":"var(--ink)"}" stroke-width="${on?5:2.5}"/>
+      ${L?`<text x="${L.tx}" y="${L.ty}" font-size="${L.fs}" font-weight="${on?700:600}" text-anchor="${L.anchor}" fill="var(--ink)" stroke="var(--panel)" stroke-width="4" paint-order="stroke" font-family="var(--body)">${esc(r.a.n)}</text>`:""}</g>`;});
+  ppl.forEach(p=>{const x=X(p.lng),y=Y(p.lat);
+    g+=`<circle cx="${x}" cy="${y}" r="13" fill="${colorOf(p)}" stroke="var(--panel)" stroke-width="3"/><text x="${x}" y="${y+4.5}" font-size="12.5" font-weight="700" text-anchor="middle" fill="#fff" font-family="var(--body)">${esc((p.name||"?").slice(0,1))}</text>
+      <text x="${x}" y="${y+29}" font-size="11.5" text-anchor="middle" fill="var(--muted)" stroke="var(--panel)" stroke-width="3.5" paint-order="stroke" font-family="var(--body)">${esc(p.station)}</text>`;});
+  svg.innerHTML=g;
+  svg.querySelectorAll(".mc").forEach(el=>el.onclick=()=>{S.selected=el.dataset.id;renderResults();});
+}
+
+/* ───────── render: list + detail ───────── */
+function renderResults(){
+  const list=ranked();
+  if(list.length&&!list.find(r=>r.a.id===S.selected))S.selected=list[0].a.id;
+  renderMap(list);
+  const ul=$("#list");
+  if(!list.length){ul.innerHTML=`<li class="empty">출발지를 한 명 이상 넣으면<br>후보 역이 여기 나타나요.</li>`;$("#detail").innerHTML=`<div class="empty">추천 역을 고르면 놀거리와 맛집 찾기가 보여요.</div>`;return;}
+  const best=list[0];
+  ul.innerHTML=list.map((r,i)=>{const[fl,fc]=fairLabel(r.spread);
+    return `<li><button class="cand" type="button" data-id="${r.a.id}" aria-current="${r.a.id===S.selected}">
+      <span class="rank">${i+1}</span>
+      <span><span class="nm">${esc(r.a.n)} ${r.a.lines.slice(0,3).map(lineBadge).join("")}
+        ${r.a.pop===2?`<span class="tag pop">팝업 성지</span>`:""}${S.tab==="mid"||r.spread>35?`<span class="tag ${fc}">${fl}</span>`:""}</span>
+        <span class="why">${esc(whyLine(r,best))}</span></span>
+      <span class="mins">평균 ${Math.round(r.avg)}분<small>최대 ${r.max}분</small></span></button></li>`;}).join("");
+  ul.querySelectorAll(".cand").forEach(b=>b.onclick=()=>{S.selected=b.dataset.id;renderResults();});
+  renderDetail(list.find(r=>r.a.id===S.selected));
+}
+function renderDetail(r){
+  const a=r.a,[fl]=fairLabel(r.spread),lc=LINE_COLORS[a.lines[0]]||"var(--accent)";
+  const maxM=Math.max(...r.t.map(x=>x.m),1);
+  const prefsAll=new Set(S.people.flatMap(p=>p.prefs||[]));
+  const foodQ=prefsAll.has("bar")?"술집":prefsAll.has("cafe")&&!prefsAll.has("food")?"카페":"맛집";
+  const short=a.n.split("·")[0].split(" ")[0];
+  const direct=r.t.filter(x=>x.shared).map(x=>x.p.name);
+  const c=S.course[a.id];
+  $("#detail").innerHTML=`
+    <div class="sign" style="--lc:${lc}">
+      <div class="sign-top"><span class="lines">${a.lines.map(lineBadge).join("")}</span><span>${esc(a.st)}역 · ${S.tab==="mid"?"거리 중간":S.tab==="taste"?"취향 저격":"핫플·팝업"} 추천</span></div>
+      <div class="sign-name">${esc(a.n)}<small>${a.hot>=5?"요즘 제일 핫함":a.hot>=4?"요즘 인기":""}</small></div>
+    </div>
+    <div class="dbody">
+      <p class="vibe">${esc(a.vibe)}</p>
+      <div class="stats">
+        <div class="stat"><div class="k">평균 소요</div><div class="v">${Math.round(r.avg)}분</div></div>
+        <div class="stat"><div class="k">가장 먼 사람</div><div class="v">${r.max}분</div></div>
+        <div class="stat"><div class="k">편차 ${r.spread}분</div><div class="v sm">${fl}</div></div>
+      </div>
+      <div class="sec"><h3>각자 걸리는 시간 <span class="hint">추정치</span></h3><div class="bars">
+        ${r.t.map(x=>`<div class="bar"><span class="who">${esc(x.p.name)}</span><span class="track"><span class="fill" style="width:${Math.max(6,x.m/maxM*100)}%;background:${colorOf(x.p)}"></span></span><span class="m">${x.walk?"도보 ":""}${x.m}분</span></div>`).join("")}
+      </div><p class="hint" style="margin-top:6px">${direct.length===r.t.length?"모두 환승 없이 갈 수 있어요":direct.length?esc(direct.join(", "))+" — 환승 없이 도착":"모두 환승이 필요할 수 있어요"}</p></div>
+      <div class="sec"><h3>취향 매칭 <span class="hint">진하게 = 멤버 취향과 일치</span></h3><div class="chips">
+        ${a.tags.map(k=>`<span class="chip static" aria-pressed="${r.hits.includes(k)}">${PREF_LABEL[k]}</span>`).join("")}
+      </div></div>
+      <div class="sec"><h3>이 동네 놀거리</h3><ul class="spots">${a.spots.map(s=>`<li>${esc(s)}</li>`).join("")}</ul></div>
+      <div class="sec"><h3>지금 정보 찾기 <span class="hint">새 탭에서 열려요</span></h3><div class="linkrow">
+        <a class="linkbtn" target="_blank" rel="noopener" href="${qNaver(a.st+"역 "+foodQ)}"><i style="background:#03C75A"></i>${foodQ} · 네이버지도</a>
+        <a class="linkbtn" target="_blank" rel="noopener" href="${qKakao(a.st+"역 맛집")}"><i style="background:#FEE500"></i>맛집 · 카카오맵</a>
+        <a class="linkbtn" target="_blank" rel="noopener" href="${qSearch(short+" 팝업스토어")}"><i style="background:var(--popup)"></i>지금 팝업 검색</a>
+        <a class="linkbtn" target="_blank" rel="noopener" href="${qSearch(short+" 놀거리")}"><i style="background:var(--ink)"></i>놀거리 검색</a>
+        <a class="linkbtn" target="_blank" rel="noopener" href="${qInsta(short+(short.endsWith("길")?"":"핫플"))}"><i style="background:#C13584"></i>인스타 태그</a>
+      </div></div>
+      <div class="sec"><h3>AI 코스 짜기 ${S.sample?`<button class="btn btn-ghost btn-sm" id="courseBtn" type="button" ${S.courseBusy?"disabled":""}>${c?"다시 짜기":"코스 추천받기"}</button>`:""}</h3>
+        <div id="courseOut">${c?courseHTML(c):S.sample?`<p class="hint">멤버들 취향을 반영해 ‘놀거리 → 식사 → 2차’ 코스를 짜드려요.</p>`:`<p class="hint">AI 코스 추천은 claude.ai에서 이 페이지를 열면 쓸 수 있어요.</p>`}</div>
+      </div>
+    </div>`;
+  const cb=$("#courseBtn");if(cb)cb.onclick=()=>makeCourse(r);
+}
+function courseHTML(c){
+  if(c.error)return `<p class="err">${esc(c.error)}</p>`;
+  return `<ol class="course">${(c.course||[]).map(s=>`<li><div class="when">${esc(s.time||"")}</div><div class="ttl">${esc(s.title||"")}</div><div class="what">${esc(s.what||"")}</div>${s.search?`<a target="_blank" rel="noopener" href="${qNaver(s.search)}">네이버지도에서 찾기 →</a>`:""}</li>`).join("")}</ol>
+    ${c.tip?`<p class="hint" style="margin-top:4px">팁 · ${esc(c.tip)}</p>`:""}
+    <p class="ai-note">AI 추천이라 실제 영업 여부·위치는 링크로 꼭 확인하세요.</p>`;
+}
+function renderAll(){renderRoom();renderFriends();renderResults();}
+
+/* ───────── AI (sample) ───────── */
+async function makeCourse(r){
+  if(!S.sample||S.courseBusy)return;
+  const a=r.a,ppl=S.people.filter(p=>typeof p.lat==="number");
+  S.courseBusy=a.id;renderDetail(r);
+  $("#courseOut").innerHTML=`<div class="stream">코스를 짜는 중…</div>`;
+  const prefs=ppl.map(p=>`${p.name}: ${(p.prefs||[]).map(k=>PREF_LABEL[k]).join(", ")||"상관없음"}`).join("\n");
+  const prompt=`친구 ${ppl.length}명이 서울/수도권 "${a.n}"(${a.st}역) 근처에서 만나요. 오늘은 ${new Date().toLocaleDateString("ko-KR")}.
+이 동네 대표 놀거리: ${a.spots.join(", ")}.
+멤버별 취향:
+${prefs}
+
+이 그룹을 위해 3~4단계 약속 코스(예: 놀거리 → 식사 → 카페/2차)를 짜주세요.
+- 실제로 존재하는 잘 알려진 장소나 거리/골목 위주로. 확실하지 않은 가게 이름은 지어내지 말고 "○○골목 이자카야"처럼 종류+위치로 적으세요.
+- 각 단계의 search는 네이버지도에서 검색할 짧은 검색어.
+JSON만 출력: {"course":[{"time":"오후 2:00","title":"...","what":"한 줄 설명(취향 반영 이유 포함)","search":"..."}],"tip":"이 동네에서 약속 잡을 때 팁 한 줄"}`;
+  try{
+    const res=await S.sample.json(prompt,{modelTier:"quick",onText:({text})=>{const el=document.querySelector("#courseOut .stream");if(el)el.textContent=text.slice(-400);}});
+    S.course[a.id]=res&&Array.isArray(res.course)?res:{error:"코스를 읽지 못했어요. ‘다시 짜기’를 눌러 주세요."};
+  }catch(e){
+    const code=e&&e.code;
+    S.course[a.id]={error:code==="not_granted"?"AI 사용이 허용되지 않았어요. 권한을 허용하면 코스를 짤 수 있어요.":code==="rate_limited"?"요청이 많아요. 잠시 뒤 다시 눌러 주세요.":"코스를 만들지 못했어요. 잠시 뒤 다시 눌러 주세요."};
+  }
+  S.courseBusy=null;
+  renderResults();
+}
+async function aiLocate(q){
+  const res=await S.sample.json(`한국의 장소 "${q}"의 대략적인 위치와 가장 가까운 지하철역을 알려줘. JSON만 출력: {"name":"정식 명칭","lat":37.5,"lng":127.0,"station":"가까운 역 이름(역 글자 빼고)","found":true} 모르면 {"found":false}`,{modelTier:"quick"});
+  if(!res||!res.found||typeof res.lat!=="number"||typeof res.lng!=="number"||res.lat<33||res.lat>39||res.lng<124||res.lng>132)throw new Error("nf");
+  const near=STATIONS[String(res.station||"").replace(/역$/,"")];
+  return{station:res.name||q,lat:res.lat,lng:res.lng,lines:near?near.lines:[],ai:true};
+}
+
+/* ───────── departure autocomplete ───────── */
+let sugIdx=0,sugItems=[];
+function renderSuggest(){
+  const inp=$("#stationInput"),q=inp.value.trim().replace(/역$/,""),box=$("#suggest");
+  if(!q){box.hidden=true;inp.setAttribute("aria-expanded","false");return;}
+  const hits=STATION_NAMES.filter(n=>n.includes(q)).sort((a,b)=>(b.startsWith(q)-a.startsWith(q))||a.length-b.length).slice(0,8);
+  sugItems=hits.map(n=>({type:"st",n}));
+  if(S.sample&&!STATIONS[q])sugItems.push({type:"ai",n:q});
+  if(!sugItems.length){box.innerHTML=`<div class="hint" style="padding:8px 9px">‘${esc(q)}’ 역을 찾지 못했어요. 가까운 지하철역 이름으로 검색해 보세요.</div>`;box.hidden=false;return;}
+  sugIdx=Math.min(sugIdx,sugItems.length-1);
+  box.innerHTML=sugItems.map((s,i)=>s.type==="st"
+    ?`<button type="button" role="option" data-i="${i}" aria-selected="${i===sugIdx}"><span>${esc(s.n)}역</span><span>${STATIONS[s.n].lines.slice(0,4).map(lineBadge).join("")}</span></button>`
+    :`<button type="button" role="option" data-i="${i}" aria-selected="${i===sugIdx}"><span>‘${esc(s.n)}’ AI로 위치 찾기</span><span class="ai">동네·건물명도 OK</span></button>`).join("");
+  box.hidden=false;inp.setAttribute("aria-expanded","true");
+  box.querySelectorAll("button").forEach(b=>b.onmousedown=e=>{e.preventDefault();pickSuggest(+b.dataset.i);});
+}
+async function pickSuggest(i){
+  const s=sugItems[i];if(!s)return;const inp=$("#stationInput");$("#suggest").hidden=true;inp.setAttribute("aria-expanded","false");
+  if(s.type==="st"){S.pending={station:s.n,...STATIONS[s.n]};inp.value=s.n+"역";showErr("");return;}
+  showErr("");inp.disabled=true;inp.value="위치 찾는 중…";
+  try{S.pending=await aiLocate(s.n);inp.value=S.pending.station+" (AI 추정)";}
+  catch(e){S.pending=null;inp.value=s.n;showErr("위치를 찾지 못했어요. 가까운 지하철역 이름으로 다시 검색해 주세요.");}
+  inp.disabled=false;
+}
+function showErr(m){const e=$("#formErr");e.textContent=m;e.hidden=!m;}
+$("#stationInput").addEventListener("input",()=>{S.pending=null;sugIdx=0;renderSuggest();});
+$("#stationInput").addEventListener("keydown",e=>{
+  const box=$("#suggest");if(box.hidden)return;
+  if(e.key==="ArrowDown"){e.preventDefault();sugIdx=Math.min(sugIdx+1,sugItems.length-1);renderSuggest();}
+  else if(e.key==="ArrowUp"){e.preventDefault();sugIdx=Math.max(sugIdx-1,0);renderSuggest();}
+  else if(e.key==="Enter"){e.preventDefault();pickSuggest(sugIdx);}
+  else if(e.key==="Escape"){box.hidden=true;}
+});
+$("#stationInput").addEventListener("blur",()=>setTimeout(()=>{$("#suggest").hidden=true;},120));
+
+/* ───────── people CRUD ───────── */
+$("#addForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const name=$("#nameInput").value.trim().slice(0,12);
+  if(!name){showErr("이름을 입력해 주세요.");$("#nameInput").focus();return;}
+  if(!S.pending){const q=$("#stationInput").value.trim().replace(/역$/,"");
+    if(STATIONS[q])S.pending={station:q,...STATIONS[q]};
+    else{showErr("출발역을 목록에서 골라 주세요.");$("#stationInput").focus();return;}}
+  const pend=S.pending;
+  if(S.mode==="example"){ if(S.db){await joinRoom(genCode());} else {S.mode="local";S.people=[];} }
+  const used=new Set(S.people.map(p=>p.color));
+  const color=FRIEND_COLORS.find(c=>!used.has(c))||FRIEND_COLORS[S.people.length%FRIEND_COLORS.length];
+  const p={id:"p"+Date.now().toString(36)+Math.random().toString(36).slice(2,6),name,station:pend.station,lat:pend.lat,lng:pend.lng,lines:pend.lines||[],prefs:[...S.formPrefs],color,ai:!!pend.ai,at:Date.now()};
+  $("#nameInput").value="";$("#stationInput").value="";S.pending=null;S.formPrefs.clear();renderPrefChips();showErr("");
+  S.people=[...S.people,p];
+  if(S.mode==="room"){
+    renderAll();
+    try{await S.db.collection(`rooms/${S.room}/people`).doc(p.id).set(p);}catch(err){showErr("저장하지 못했어요. 네트워크를 확인하고 다시 추가해 주세요.");}
+  }else{save();renderAll();}
+  $("#nameInput").focus();
+});
+async function removePerson(id){
+  S.people=S.people.filter(p=>p.id!==id);renderAll();
+  if(S.mode==="room"){try{await S.db.collection(`rooms/${S.room}/people`).doc(id).delete();}catch(e){}}
+  else save();
+}
+function save(){if(S.mode==="local")lsSet("moim.local",S.people);}
+
+/* ───────── rooms (db) ───────── */
+function genCode(){const A="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let s="";for(let i=0;i<5;i++)s+=A[Math.floor(Math.random()*A.length)];return s;}
+function createRoom(){joinRoom(genCode());$("#nameInput").focus();}
+function joinRoom(code){
+  if(!S.db)return;
+  if(S.unsub){try{S.unsub();}catch(e){}S.unsub=null;}
+  S.mode="room";S.room=code;S.people=[];S.course={};lsSet("moim.room",code);renderAll();
+  S.unsub=S.db.collection(`rooms/${code}/people`).onSnapshot(snap=>{
+    S.people=snap.docs.map(d=>({id:d.id,...d.data()})).filter(p=>typeof p.lat==="number").sort((a,b)=>(a.at||0)-(b.at||0));
+    renderFriends();renderResults();
+  },()=>{showErr("모임 연결이 끊겼어요. 새로고침하면 다시 연결돼요.");});
+}
+function leaveRoom(){
+  if(S.unsub){try{S.unsub();}catch(e){}S.unsub=null;}
+  lsSet("moim.room",null);S.mode="example";S.room=null;S.people=EXAMPLE.slice();S.course={};renderAll();
+}
+
+/* ───────── tabs ───────── */
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
+  S.tab=t.dataset.tab;S.selected=null;
+  document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected",x===t));
+  $("#mapTitle").textContent=S.tab==="mid"?"중간역 지도":S.tab==="taste"?"취향 저격 지도":"핫플·팝업 지도";
+  renderResults();
+});
+
+/* ───────── boot ───────── */
+(function boot(){
+  const local=lsGet("moim.local",null);
+  if(Array.isArray(local)&&local.length){S.mode="local";S.people=local;}
+  renderPrefChips();renderAll();
+  if(!(window.claude&&typeof window.claude.use==="function"))return;
+  window.claude.use("sample").then(s=>{if(s){S.sample=s;renderResults();}}).catch(()=>{});
+  window.claude.use("db").then(db=>{
+    if(!db)return;S.db=db;
+    let code=null;try{code=new URLSearchParams(location.search).get("room");}catch(e){}
+    code=String(code||lsGet("moim.room","")||"").toUpperCase();
+    if(/^[A-Z0-9]{4,6}$/.test(code))joinRoom(code);else renderRoom();
+  }).catch(()=>{});
+})();
+</script>

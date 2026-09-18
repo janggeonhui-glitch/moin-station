@@ -1,0 +1,71 @@
+/*
+ * 디자인 토큰 — "승강장 타일" 톤의 그린 그레이 바탕 + 2호선 초록 포인트.
+ * 라이트가 기본값, 다크는 시스템 설정과 data-theme 토글 양쪽에서 동작한다.
+ */
+:root {
+  --ground: #edf0eb;
+  --panel: #ffffff;
+  --panel-2: #f6f8f4;
+  --ink: #15201b;
+  --muted: #5c6962;
+  --faint: #7b8780;
+  --line: #d3dad4;
+
+  --accent: #007a3d;
+  --accent-ink: #ffffff;
+  --accent-soft: #ddf2e4;
+  --popup: #c21f62;
+  --popup-soft: #fbe3ec;
+  --warn: #9a5c00;
+  --warn-soft: #fbefd9;
+
+  --shadow: 0 1px 0 rgb(21 32 27 / 0.04), 0 8px 24px -12px rgb(21 32 27 / 0.18);
+  --radius-lg: 14px;
+  --radius-md: 10px;
+
+  --font-display: 'Do Hyeon', 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  --font-body: 'IBM Plex Sans KR', 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --ground: #0e1411;
+    --panel: #161f1a;
+    --panel-2: #1c2721;
+    --ink: #e4ece7;
+    --muted: #9aa9a1;
+    --faint: #7d8c84;
+    --line: #2a3730;
+    --accent: #2bc46e;
+    --accent-ink: #06150c;
+    --accent-soft: #163a26;
+    --popup: #ff6fa6;
+    --popup-soft: #3a1726;
+    --warn: #f0ae4a;
+    --warn-soft: #3a2a10;
+    --shadow: 0 1px 0 rgb(0 0 0 / 0.3), 0 10px 28px -14px rgb(0 0 0 / 0.6);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --ground: #0e1411;
+  --panel: #161f1a;
+  --panel-2: #1c2721;
+  --ink: #e4ece7;
+  --muted: #9aa9a1;
+  --faint: #7d8c84;
+  --line: #2a3730;
+  --accent: #2bc46e;
+  --accent-ink: #06150c;
+  --accent-soft: #163a26;
+  --popup: #ff6fa6;
+  --popup-soft: #3a1726;
+  --warn: #f0ae4a;
+  --warn-soft: #3a2a10;
+  --shadow: 0 1px 0 rgb(0 0 0 / 0.3), 0 10px 28px -14px rgb(0 0 0 / 0.6);
+  color-scheme: dark;
+}

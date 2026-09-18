@@ -1,0 +1,275 @@
+.detail {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: enter 0.24s ease-out;
+}
+
+@keyframes enter {
+  from {
+    transform: translateY(4px);
+    opacity: 0.6;
+  }
+}
+
+/* ─── 역명판 ─── */
+.sign {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 18px 20px;
+  background: var(--sign-bg);
+  color: #fff;
+}
+
+/* 역명판 하단 음영 띠 */
+.sign::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 5px;
+  background: rgb(0 0 0 / 0.22);
+}
+
+.signTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.signName {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.signName small {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.18);
+}
+
+/* ─── 본문 ─── */
+.body {
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.vibe {
+  font-size: 14.5px;
+  color: var(--muted);
+}
+
+.stats {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.stat {
+  background: var(--panel-2);
+  border-radius: var(--radius-md);
+  padding: 9px 11px;
+}
+
+.stat dt {
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+.stat dd {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 19px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat .statText {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  padding-top: 4px;
+}
+
+.statText[data-tone='good'] {
+  color: var(--accent);
+}
+
+.statText[data-tone='warn'] {
+  color: var(--warn);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.section h3 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 8px;
+  flex-wrap: wrap;
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+/* 소요 시간 막대 */
+.bars {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.bar {
+  display: grid;
+  grid-template-columns: 72px 1fr 64px;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+}
+
+.barWho {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.barTrack {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--panel-2);
+  overflow: hidden;
+}
+
+.barFill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.35s ease-out;
+}
+
+.barMin {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 취향 칩 */
+.tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tagChip {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.tagChip[data-hit='true'] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--panel);
+  font-weight: 600;
+}
+
+/* 놀거리 */
+.spots {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.spots li {
+  font-size: 13.5px;
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+}
+
+/* 외부 링크 */
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 11px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--panel);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.15s;
+}
+
+.link:hover {
+  border-color: var(--ink);
+}
+
+.link i {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+.link svg {
+  color: var(--faint);
+}
+
+@media (max-width: 480px) {
+  .signName {
+    font-size: 34px;
+  }
+
+  .stat {
+    padding: 8px;
+  }
+
+  .stat dd {
+    font-size: 16px;
+  }
+
+  .spots {
+    grid-template-columns: 1fr;
+  }
+}
