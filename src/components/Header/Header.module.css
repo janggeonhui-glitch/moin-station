@@ -13,18 +13,16 @@
   min-width: 0;
 }
 
-/* 환승역 표시(흰 원 + 굵은 테두리)를 로고로 */
+/* 앱 아이콘: 흰 라운드 사각형 위 핀 세 개 (다크 모드에서도 흰 바탕 유지) */
 .mark {
   flex: none;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  border: 6px solid var(--accent);
-  background: var(--panel);
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid var(--line);
   display: grid;
   place-items: center;
-  font-family: var(--font-display);
-  font-size: 18px;
 }
 
 .title {

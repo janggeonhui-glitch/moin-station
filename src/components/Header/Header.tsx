@@ -1,5 +1,6 @@
 import type { ThemePref } from '../../hooks/useTheme';
 import { MonitorIcon, MoonIcon, ShareIcon, SunIcon } from '../ui/Icons';
+import { LogoMark } from '../ui/LogoMark';
 import styles from './Header.module.css';
 
 const THEME_META: Record<ThemePref, { label: string; Icon: typeof SunIcon }> = {
@@ -20,11 +21,11 @@ export function Header({ themePref, onCycleTheme, onShare, canShare }: Props) {
   return (
     <header className={styles.header}>
       <div className={styles.brand}>
-        <span className={styles.mark} aria-hidden="true">
-          중
+        <span className={styles.mark}>
+          <LogoMark size={40} />
         </span>
         <div>
-          <h1 className={styles.title}>어디서만나</h1>
+          <h1 className={styles.title}>centro</h1>
           <p className={styles.tagline}>각자 출발역만 넣으면, 모두에게 공평한 중간역과 놀 거리를 찾아줘요</p>
         </div>
       </div>

@@ -37,7 +37,7 @@ export default function App() {
     const isTouch = typeof window.matchMedia === 'function' && window.matchMedia('(pointer: coarse)').matches;
     if (isTouch && typeof navigator.share === 'function') {
       try {
-        await navigator.share({ title: '어디서만나', text: '우리 모임 중간역 같이 정해보자!', url });
+        await navigator.share({ title: 'centro', text: '우리 모임 중간역 같이 정해보자!', url });
       } catch {
         /* 사용자가 공유 시트를 닫은 경우 */
       }
